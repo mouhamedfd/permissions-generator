@@ -83,11 +83,11 @@ MIT. Please see the [license file](license.md) for more information.
 [ico-version]: https://img.shields.io/packagist/v/mouhamedfd/permissions-generator.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/mouhamedfd/permissions-generator.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/mouhamedfd/permissions-generator/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
+[ico-styleci]: https://styleci.io/repos/412280586/shield
 
 [link-packagist]: https://packagist.org/packages/mouhamedfd/permissions-generator
 [link-downloads]: https://packagist.org/packages/mouhamedfd/permissions-generator
 [link-travis]: https://travis-ci.org/mouhamedfd/permissions-generator
-[link-styleci]: https://styleci.io/repos/12345678
+[link-styleci]: https://styleci.io/repos/412280586
 [link-author]: https://github.com/mouhamedfd
 [link-contributors]: ../../contributors
