@@ -1,4 +1,4 @@
-# PermissionsGenerator
+# Permissions Generator
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -9,15 +9,20 @@ This package add some artisan command to help generating permissions for your de
 
 Each route should have an alias (name) seperated by dot(.) for exemple:
 
-In this example permissions will be generated for the PostController linked to the **specialaction** and **anotheraction**
 
+```bash
+Route::get('/posts/special_action',[App\Http\Controllers\PostController::class, 'specialaction'])->name('posts.specialaction');
+Route::get('/posts/another_action',[App\Http\Controllers\PostController::class, 'anotheraction'])->name('posts.anotheraction');
+```
+In this example permissions will be generated for the PostController linked to the **specialaction** and **anotheraction**
 
 ``` bash
 public function __construct()//#
 {
-        Route::get('/posts/special_action',[App\Http\Controllers\PostController::class, 'specialaction'])->name('posts.specialaction');
-
-        Route::get('/posts/another_action',[App\Http\Controllers\PostController::class, 'anotheraction'])->name('posts.anotheraction');
+    $this->middleware('auth');
+    $this->middleware(['permission:posts.specialaction'])->only(['specialaction']);
+    $this->middleware(['permission:posts.anotheraction'])->only(['anotheraction']);
+        
  }//#
 
 ```
@@ -33,6 +38,27 @@ Via Composer
 
 ``` bash
 $ composer require mouhamedfd/permissions-generator
+```
+### Publish configuration
+```bash
+php artisan vendor:publish --tag=permissions-generator.config
+```
+
+The default configuration exclude some keywords and some columns, it's also possible to add some middlewares
+
+```bash
+return [
+    'excluded_keywords'=>[
+        'Auth',
+        'Translation',
+    ],
+    'have_resource_column'=>false,
+    'have_description_column'=>false,
+    'middlewares'=>[
+        'auth',
+    ],
+
+];
 ```
 
 ## Usage
