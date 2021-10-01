@@ -14,10 +14,6 @@ class PermissionsGeneratorServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'mouhamedfd');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'mouhamedfd');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
@@ -62,22 +58,6 @@ class PermissionsGeneratorServiceProvider extends ServiceProvider
             __DIR__.'/../config/permissions-generator.php' => config_path('permissions-generator.php'),
         ], 'permissions-generator.config');
 
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/mouhamedfd'),
-        ], 'permissions-generator.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/mouhamedfd'),
-        ], 'permissions-generator.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/mouhamedfd'),
-        ], 'permissions-generator.views');*/
-
-        // Registering package commands.
         $this->commands([
             PermissionsGeneratorCommand::class,
         ]);
