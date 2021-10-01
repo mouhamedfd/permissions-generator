@@ -83,11 +83,11 @@ php artisan permission:generate --action=controllers
 
 Please see the [changelog](changelog.md) for more information on what has changed recently.
 
-## Testing
+<!-- ## Testing -->
 
-``` bash
+<!-- ``` bash
 $ composer test
-```
+``` -->
 
 ## Contributing
 
