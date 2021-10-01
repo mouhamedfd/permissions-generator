@@ -10,6 +10,6 @@ return [
     'have_description_column'=>false,
     'middlewares'=>[
         'auth',
-    ]
+    ],
 
 ];
