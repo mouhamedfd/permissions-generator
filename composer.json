@@ -1,0 +1,42 @@
+{
+    "name": "mouhamedfd/permissions-generator",
+    "description": ":permission generation for all your declared routes with corresponding controller action",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mouhamed Fadel Diagana",
+            "email": "mouhamedfd@gmail.com",
+            "homepage": "https://github.com/mouhamedfd"
+        }
+    ],
+    "homepage": "https://github.com/mouhamedfd/permissions-generator",
+    "keywords": ["Laravel", "Permissions","Security","Authorization","Generator"],
+    "require": {
+        "illuminate/support": "~7|~8",
+        "spatie/laravel-permission": "^4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~5|~6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mouhamedfd\\PermissionsGenerator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mouhamedfd\\PermissionsGenerator\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mouhamedfd\\PermissionsGenerator\\PermissionsGeneratorServiceProvider"
+            ],
+            "aliases": {
+                "PermissionsGenerator": "Mouhamedfd\\PermissionsGenerator\\Facades\\PermissionsGenerator"
+            }
+        }
+    }
+}
