@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Artisan;
 
 class PermissionsGenerator
 {
-
     public function simulate()
     {
         $exitCode = Artisan::call('permission:generate');
