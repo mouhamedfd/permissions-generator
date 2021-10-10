@@ -7,7 +7,10 @@
 
 This package add some artisan command to help generating permissions for your declared routes.
 
-Each route should have an alias (name) seperated by dot(.) for exemple:
+For the permissions management this package use [Laravel-permission](https://github.com/spatie/laravel-permission/tree/main) by [Spatie](https://spatie.be/docs/laravel-permission/v5/introduction)
+
+### Usage
+Each of your routes that you want to add permission should have an alias (name) seperated by dot(.) for exemple:
 
 
 ```bash
