@@ -86,11 +86,16 @@ php artisan permission:generate --action=controllers
 
 Please see the [changelog](changelog.md) for more information on what has changed recently.
 
-<!-- ## Testing -->
+## Testing [<span style="color: blue">PHPUnit</span>](https://phpunit.de/)
 
-<!-- ``` bash
-$ composer test
-``` -->
+```bash
+git clone https://github.com/mouhamedfd/permissions-generator.git
+composer install
+cp vendor/spatie/laravel-permission/config/permission.php vendor/orchestra/testbench-core/laravel/config/permission.php
+vendor/bin/testbench cache:clear
+vendor/bin/testbench config:clear
+composer exec phpunit [or vendor/bin/phpunit]
+```
 
 ## Contributing
 
