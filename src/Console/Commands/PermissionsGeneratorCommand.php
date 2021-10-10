@@ -11,8 +11,8 @@ class PermissionsGeneratorCommand extends Command
 {
     private $found_controller = false;
     private $header =
-    '    /**'.PHP_EOL.
-        '     * By MouhamedFd PermissionGenerator'.PHP_EOL.
+        '    /**'.PHP_EOL .
+        '     * By MouhamedFd PermissionGenerator'.PHP_EOL .
         '     */'.PHP_EOL;
     /**
      * The name and signature of the console command.
@@ -65,7 +65,7 @@ class PermissionsGeneratorCommand extends Command
             }
         }
 
-        echo 'Constructor to replace -> First line: '.$target_first_line.' Last Line: '.$target_last_line.PHP_EOL;
+        $this->info('Constructor to replace -> First line: '.$target_first_line.' Last Line: '.$target_last_line);
         foreach ($controller_lines_array as $key => $controller_line) {
             if ($target_first_line != -1 && $target_last_line != -1 && $key >= $target_first_line && $key <= $target_last_line) {
                 $output .= '';
@@ -86,19 +86,19 @@ class PermissionsGeneratorCommand extends Command
     public function showHeader($action)
     {
         if ($action == 'simulate') {
-            echo '========='.str_pad('', 90, '.:', STR_PAD_BOTH).'========='.PHP_EOL;
-            echo '========='.str_pad('SIMULATION MODE', 90, '.:', STR_PAD_BOTH).'========='.PHP_EOL;
-            echo '========='.str_pad('', 90, '.:', STR_PAD_BOTH).'========='.PHP_EOL;
+            $this->info('========='.str_pad('', 90, '.:', STR_PAD_BOTH).'=========');
+            $this->info('========='.str_pad('SIMULATION MODE', 90, '.:', STR_PAD_BOTH).'=========');
+            $this->info('========='.str_pad('', 90, '.:', STR_PAD_BOTH).'=========');
         }
         if ($action == 'controllers') {
-            echo '========='.str_pad('', 90, '.:', STR_PAD_BOTH).'========='.PHP_EOL;
-            echo '========='.str_pad('GENERATION MODE', 90, '.:', STR_PAD_BOTH).'========='.PHP_EOL;
-            echo '========='.str_pad('', 90, '.:', STR_PAD_BOTH).'========='.PHP_EOL;
+            $this->info('========='.str_pad('', 90, '.:', STR_PAD_BOTH).'=========');
+            $this->info('========='.str_pad('GENERATION MODE', 90, '.:', STR_PAD_BOTH).'=========');
+            $this->info('========='.str_pad('', 90, '.:', STR_PAD_BOTH).'=========');
         }
         if ($action == 'database') {
-            echo '========='.str_pad('', 90, '.:', STR_PAD_BOTH).'========='.PHP_EOL;
-            echo '========='.str_pad('GENERATION MODE', 90, '.:', STR_PAD_BOTH).'========='.PHP_EOL;
-            echo '========='.str_pad('', 90, '.:', STR_PAD_BOTH).'========='.PHP_EOL;
+            $this->info('========='.str_pad('', 90, '.:', STR_PAD_BOTH).'=========');
+            $this->info('========='.str_pad('GENERATION MODE', 90, '.:', STR_PAD_BOTH).'=========');
+            $this->info('========='.str_pad('', 90, '.:', STR_PAD_BOTH).'=========');
         }
     }
 
@@ -113,7 +113,6 @@ class PermissionsGeneratorCommand extends Command
         foreach ($keyword_array as $key => $keyword) {
             $result = str_contains($to_check, $keyword) || $result;
         }
-
         return $result;
     }
 
@@ -161,7 +160,7 @@ class PermissionsGeneratorCommand extends Command
                     $alias = $route->action['as'];
                     $routeAliases[] = $alias;
                     $group = explode('.', $alias)[0];
-                    if (! in_array($group, $groups)) {
+                    if (!in_array($group, $groups)) {
                         $groups[] = $group;
                     }
                 } else {
@@ -183,37 +182,37 @@ class PermissionsGeneratorCommand extends Command
                 $controllerMethods[$i] != null
                 && $routeAliases[$i] != null
                 && count(explode('.', $routeAliases[$i])) >= 2
-                && $routeAliases[$i] != null
                 && $controllerNames[$i] != null
-                && ! $this->haveKeywordInside($excluded_keywords, $controllerPaths[$i])
+                && !$this->haveKeywordInside($excluded_keywords, $controllerPaths[$i])
             ) {
                 $controllerName = $controllerNames[$i];
-                $path = str_replace('App', 'app', str_replace('\\', '/', base_path($controllerPaths[$i].'.php')));
+                $path = app_path('Http/Controllers/'.$controllerName.'.php');
                 //A new controller [pre checked]
                 if ($controllerNameTemp != $controllerName) {
                     //for information and processing purpose
                     $this->found_controller = false;
-                    echo '========='.str_pad($controllerName, 90, '.:', STR_PAD_BOTH).'========='.PHP_EOL;
-                    echo '#########'.str_pad($path, 90, '.:', STR_PAD_BOTH).'#########'.PHP_EOL;
+                    $this->info('========='.str_pad($controllerName, 90, '.:', STR_PAD_BOTH).'=========');
+                    $this->info('#########'.str_pad($path, 90, '.:', STR_PAD_BOTH).'#########');
                     try {
                         //display the search term
                         $search = 'class '.$controllerNames[$i].' extends Controller'.PHP_EOL.'{'.PHP_EOL;
-                        echo 'SEARCH TERM:'.$search.PHP_EOL;
+                        $this->info('SEARCH TERM:'.$search);
                         $file_txt = '';
                         $file_txt = File::get($path);
 
                         //search for the controller declaration
                         if (str_contains($file_txt, $search)) {
                             $this->found_controller = true;
-                            echo 'Pattern Found'.PHP_EOL;
+                            $this->line('Pattern Found');
                             $to_insert = $search.$this->header.'    public function __construct()//#'.PHP_EOL.'    {'.PHP_EOL;
                             $to_insert .= $middleware_text;
                         } else {
-                            echo 'Pattern Not Found'.PHP_EOL;
+                            $this->info('Pattern Not Found');
                             $this->found_controller = false;
                         }
                     } catch (\Exception $e) {
-                        echo 'cannot read file'.PHP_EOL;
+                        $this->error('cannot read file');
+                        $this->error($e->getMessage());
                         $this->found_controller = false;
                     }
                     $controllerNameTemp = $controllerName;
@@ -226,11 +225,10 @@ class PermissionsGeneratorCommand extends Command
                 //the test is to close the brace for the constructor and to insert the code in the controller
                 if (($i <= count($controllerMethods) - 2 && $controllerNames[$i] != $controllerNames[$i + 1]) || ($i == count($controllerMethods) - 1)) {
                     $to_insert .= '    }//#'.PHP_EOL;
-                    echo $to_insert;
-                    if ($this->found_controller) {
-                        echo 'Controller Found'.PHP_EOL;
-                    }
-                    echo 'PATH:'.$path.PHP_EOL;
+                    $this->warn($to_insert);
+                    $this->info('PATH:'.$path);
+                    $this->warn('========='.str_pad('', 90, '.:', STR_PAD_BOTH).'=========');
+                    $this->warn('#########'.str_pad('', 90, '.:', STR_PAD_BOTH).'#########');
                     if ($action == 'controllers' && $this->found_controller) {
                         $this->deleteHeaderAndConstructor($path);
                         $file_txt = File::get($path);
@@ -243,7 +241,7 @@ class PermissionsGeneratorCommand extends Command
                 if ($action == 'database' && $this->found_controller) {
                     $alias = $routeAliases[$i];
                     $permission = Permission::where('name', $alias)->first();
-                    if (! $permission) {
+                    if (!$permission) {
                         $permission = new Permission;
                         $permission->name = $alias;
                     }
