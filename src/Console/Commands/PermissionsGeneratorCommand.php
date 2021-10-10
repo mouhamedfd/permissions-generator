@@ -11,8 +11,8 @@ class PermissionsGeneratorCommand extends Command
 {
     private $found_controller = false;
     private $header =
-        '    /**'.PHP_EOL .
-        '     * By MouhamedFd PermissionGenerator'.PHP_EOL .
+        '    /**'.PHP_EOL.
+        '     * By MouhamedFd PermissionGenerator'.PHP_EOL.
         '     */'.PHP_EOL;
     /**
      * The name and signature of the console command.
@@ -113,6 +113,7 @@ class PermissionsGeneratorCommand extends Command
         foreach ($keyword_array as $key => $keyword) {
             $result = str_contains($to_check, $keyword) || $result;
         }
+
         return $result;
     }
 
@@ -160,7 +161,7 @@ class PermissionsGeneratorCommand extends Command
                     $alias = $route->action['as'];
                     $routeAliases[] = $alias;
                     $group = explode('.', $alias)[0];
-                    if (!in_array($group, $groups)) {
+                    if (! in_array($group, $groups)) {
                         $groups[] = $group;
                     }
                 } else {
@@ -183,7 +184,7 @@ class PermissionsGeneratorCommand extends Command
                 && $routeAliases[$i] != null
                 && count(explode('.', $routeAliases[$i])) >= 2
                 && $controllerNames[$i] != null
-                && !$this->haveKeywordInside($excluded_keywords, $controllerPaths[$i])
+                && ! $this->haveKeywordInside($excluded_keywords, $controllerPaths[$i])
             ) {
                 $controllerName = $controllerNames[$i];
                 $path = app_path('Http/Controllers/'.$controllerName.'.php');
@@ -241,7 +242,7 @@ class PermissionsGeneratorCommand extends Command
                 if ($action == 'database' && $this->found_controller) {
                     $alias = $routeAliases[$i];
                     $permission = Permission::where('name', $alias)->first();
-                    if (!$permission) {
+                    if (! $permission) {
                         $permission = new Permission;
                         $permission->name = $alias;
                     }
