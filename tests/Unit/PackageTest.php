@@ -92,6 +92,7 @@ class PackageTest extends TestCase
         File::copy(__DIR__.'/../../vendor/spatie/laravel-permission/database/migrations/create_permission_tables.php.stub', base_path('database/migrations/2018_01_01_000000_create_permission_tables.php'));
         $this->assertTrue(File::exists(base_path('database/migrations/2018_01_01_000000_create_permission_tables.php')));
         Artisan::call('cache:clear');
+        Artisan::call('config:clear');
         Artisan::call('migrate');
         Artisan::call('permission:generate --action=database');
         $permissions = Permission::get();
