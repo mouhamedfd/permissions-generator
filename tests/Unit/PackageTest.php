@@ -4,14 +4,11 @@ namespace Mouhamedfd\PermissionsGenerator\Tests\Unit;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Mouhamedfd\PermissionsGenerator\Tests\TestCase;
 use Spatie\Permission\Models\Permission;
 
 class PackageTest extends TestCase
 {
-
     /**
      * A basic feature test example.
      *
@@ -28,7 +25,7 @@ class PackageTest extends TestCase
     public function test_install_command_copies_the_configuration()
     {
         // make sure we're starting from a clean state
-        echo "config:" . config_path() . PHP_EOL;
+        echo 'config:'.config_path().PHP_EOL;
         if (File::exists(config_path('permissions-generator.php'))) {
             unlink(config_path('permissions-generator.php'));
         }
@@ -42,7 +39,7 @@ class PackageTest extends TestCase
 
     public function test_create_controller_and_model()
     {
-        echo "App Path:" . app_path() . PHP_EOL;
+        echo 'App Path:'.app_path().PHP_EOL;
 
         if (File::exists(app_path('Http/Controllers/PostController.php'))) {
             unlink(app_path('Http/Controllers/PostController.php'));
@@ -78,7 +75,7 @@ class PackageTest extends TestCase
     public function test_database()
     {
         //$rootpath = dirname(dirname(dirname(__FILE__)));
-        echo "Path" . __DIR__ . PHP_EOL;
+        echo 'Path'.__DIR__.PHP_EOL;
         if (File::exists(base_path('config/permission.php'))) {
             unlink(base_path('config/permission.php'));
         }
@@ -92,7 +89,7 @@ class PackageTest extends TestCase
         }
         $this->assertFalse(File::exists(base_path('database/migrations/2018_01_01_000000_create_permission_tables.php')));
         // File::copy($rootpath . '/vendor/spatie/laravel-permission/database/migrations/create_permission_tables.php.stub', base_path('database/migrations/2018_01_01_000000_create_permission_tables.php'));
-        File::copy(__DIR__ . '/../../vendor/spatie/laravel-permission/database/migrations/create_permission_tables.php.stub', base_path('database/migrations/2018_01_01_000000_create_permission_tables.php'));
+        File::copy(__DIR__.'/../../vendor/spatie/laravel-permission/database/migrations/create_permission_tables.php.stub', base_path('database/migrations/2018_01_01_000000_create_permission_tables.php'));
         $this->assertTrue(File::exists(base_path('database/migrations/2018_01_01_000000_create_permission_tables.php')));
         Artisan::call('migrate');
         Artisan::call('permission:generate --action=database');
