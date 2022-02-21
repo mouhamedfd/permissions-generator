@@ -121,7 +121,7 @@ MIT. Please see the [license file](license.md) for more information.
 
 [link-packagist]: https://packagist.org/packages/mouhamedfd/permissions-generator
 [link-downloads]: https://packagist.org/packages/mouhamedfd/permissions-generator
-[link-travis]: https://travis-ci.org/mouhamedfd/permissions-generator
+[link-travis]: https://travis-ci.com/github//mouhamedfd/permissions-generator
 [link-styleci]: https://styleci.io/repos/412280586
 [link-author]: https://github.com/mouhamedfd
 [link-contributors]: ../../contributors
