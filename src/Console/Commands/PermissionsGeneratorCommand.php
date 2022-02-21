@@ -234,7 +234,7 @@ class PermissionsGeneratorCommand extends Command
                         $this->deleteHeaderAndConstructor($path);
                         $file_txt = File::get($path);
                         $result_txt = str_replace($search, $to_insert, $file_txt);
-                        File::put($path, $result_txt);
+                        File::put($path, rtrim($result_txt));
                     }
                 }
 
