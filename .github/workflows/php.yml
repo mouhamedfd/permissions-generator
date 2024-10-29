@@ -37,10 +37,14 @@ jobs:
               run: |
                   echo "::add-matcher::${{ runner.tool_cache }}/php.json"
                   echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+                  
             - name: Install dependencies
               run: |
                   composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                   composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
+            - name: Dump Autoload
+              run: composer dump-autoload
                   
             - name: Copy permission file
               run: cp vendor/spatie/laravel-permission/config/permission.php vendor/orchestra/testbench-core/laravel/config/permission.php
