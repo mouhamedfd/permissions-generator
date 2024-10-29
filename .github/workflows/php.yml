@@ -53,4 +53,4 @@ jobs:
             - name: Clear config
               run: vendor/bin/testbench config:clear   
             - name: Execute tests
-              run: vendor/bin/phpunit
+              run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
