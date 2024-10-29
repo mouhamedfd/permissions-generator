@@ -41,5 +41,9 @@ jobs:
               run: |
                   composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                   composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+                  
+            - name: Copy permission file
+              run: cp vendor/spatie/laravel-permission/config/permission.php vendor/orchestra/testbench-core/laravel/config/permission.php
+              
             - name: Execute tests
-              run: vendor/bin/phpunit
+              run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
