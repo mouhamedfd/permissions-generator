@@ -7,14 +7,14 @@ on:
         branches: [master]
 
 jobs:
-    build:
+    test:
         runs-on: ${{ matrix.os }}
         strategy:
             fail-fast: true
             matrix:
                 os: [ubuntu-latest, windows-latest]
-                php: [8.0, 8.3]
-                laravel: [9.*, 10.*]
+                php: [7.4, 8.0]
+                laravel: [8.*]
                 stability: [prefer-lowest, prefer-stable]
                 include:
                     - laravel: 8.*
@@ -32,7 +32,7 @@ jobs:
                   php-version: ${{ matrix.php }}
                   extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
                   coverage: none
-                  
+
             - name: Setup problem matchers
               run: |
                   echo "::add-matcher::${{ runner.tool_cache }}/php.json"
@@ -41,16 +41,5 @@ jobs:
               run: |
                   composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                   composer update --${{ matrix.stability }} --prefer-dist --no-interaction
-                  
-            - name: Dump Autoload
-              run: composer dump-autoload
-            - name: Replace permission file
-              run: cp vendor/spatie/laravel-permission/config/permission.php vendor/orchestra/testbench-core/laravel/config/permission.php
-            - name: Clear cache
-              run: vendor/bin/testbench cache:clear
-            - name: Clear config
-              run: vendor/bin/testbench config:clear
-
-            
             - name: Execute tests
-              run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+              run: vendor/bin/phpunit
