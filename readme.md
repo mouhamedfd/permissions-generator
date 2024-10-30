@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
-[[![Build Status]](https://github.com/issafy/permissions-generator/actions/workflows/php.yml/badge.svg)
+![Build Status](https://github.com/issafy/permissions-generator/actions/workflows/php.yml/badge.svg)
 [![StyleCI][ico-styleci]][link-styleci]
 
 This package add some artisan command to help generating permissions for your declared routes.
