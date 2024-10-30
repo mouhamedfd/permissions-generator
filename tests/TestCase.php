@@ -13,7 +13,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         // Route::get('/posts/list', [App\Http\Controllers\PostController::class, 'list'])->name('posts.list');
         // Route::resource('posts', App\Http\Controllers\PostController::class);
 
-    // additional setup
+        // additional setup
     }
 
     protected function defineRoutes($router)
@@ -35,9 +35,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
         // perform environment setup
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
     }
 }
